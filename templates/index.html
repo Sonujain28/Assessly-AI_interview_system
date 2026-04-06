@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Assessly</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: radial-gradient(circle at top left, #1E293B, #0F172A 60%);
+    color:#E2E8F0;
+}
+
+/* Container */
+.container{
+    backdrop-filter: blur(20px);
+    background: rgba(30,41,59,0.6);
+    border:1px solid rgba(255,255,255,0.08);
+    padding:50px;
+    width:400px;
+    border-radius:20px;
+    box-shadow: 
+        0 20px 40px rgba(0,0,0,0.6),
+        0 0 40px rgba(79,70,229,0.15);
+    text-align:center;
+}
+
+/* Title */
+h1{
+    font-weight:600;
+    margin-bottom:30px;
+    font-size:28px;
+    background: linear-gradient(90deg,#6366F1,#3B82F6);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* Input */
+input{
+    width:100%;
+    padding:14px;
+    background:rgba(15,23,42,0.8);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:10px;
+    color:#E2E8F0;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+input:focus{
+    border-color:#6366F1;
+    box-shadow:0 0 0 3px rgba(99,102,241,0.25);
+    outline:none;
+}
+
+/* Button */
+button{
+    width:100%;
+    padding:14px;
+    background: linear-gradient(90deg,#6366F1,#3B82F6);
+    border:none;
+    border-radius:10px;
+    color:white;
+    font-weight:500;
+    cursor:pointer;
+    transition:0.3s ease;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(59,130,246,0.4);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Assessly</h1>
+
+    <form action="/chat" method="POST">
+        <input type="text" name="domain" placeholder="Enter your domain (e.g. Python Developer)" required>
+        <button type="submit">Start Interview</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Assessly Chat</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: radial-gradient(circle at top left, #1E293B, #0F172A 60%);
+    color:#E2E8F0;
+}
+
+.chat-wrapper{
+    width:900px;
+    height:600px;
+    display:flex;
+    flex-direction:column;
+    backdrop-filter: blur(20px);
+    background: rgba(30,41,59,0.6);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:20px;
+    box-shadow: 
+        0 20px 40px rgba(0,0,0,0.6),
+        0 0 40px rgba(79,70,229,0.15);
+    overflow:hidden;
+}
+
+.header{
+    padding:18px;
+    text-align:center;
+    font-weight:600;
+    font-size:18px;
+    background: linear-gradient(90deg,#6366F1,#3B82F6);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.profile-btn{
+    position:absolute;
+    right:20px;
+    top:12px;
+    width:45px;
+    height:45px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    border:2px solid rgb(255, 255, 255);
+    color:white;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.profile-btn:hover{
+    background:white;
+    color:#131e36;
+    transform:scale(1.1);
+}
+
+.chat-container{
+    flex:1;
+    padding:20px;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+}
+
+/* Messages */
+.message{
+    max-width:65%;
+    padding:14px;
+    margin:8px 0;
+    border-radius:14px;
+    line-height:1.5;
+    font-size:14px;
+}
+
+.ai{
+    align-self:flex-start;
+    background:rgba(15,23,42,0.8);
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+.user{
+    align-self:flex-end;
+    background: linear-gradient(90deg,#6366F1,#3B82F6);
+    color:white;
+}
+
+/* Input Area */
+.input-area{
+    display:flex;
+    align-items:flex-end;
+    padding:15px;
+    background: rgba(15,23,42,0.8);
+    border-top:1px solid rgba(255,255,255,0.08);
+}
+
+textarea{
+    flex:1;
+    padding:12px;
+    background:rgba(15,23,42,0.8);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:10px;
+    color:#E2E8F0;
+    font-size:14px;
+    resize:none;
+    max-height:120px;
+    overflow-y:auto;
+}
+
+textarea:focus{
+    border-color:#6366F1;
+    box-shadow:0 0 0 3px rgba(99,102,241,0.25);
+    outline:none;
+}
+
+button{
+    margin-left:10px;
+    padding:12px 18px;
+    background: linear-gradient(90deg,#6366F1,#3B82F6);
+    border:none;
+    border-radius:10px;
+    color:white;
+    font-weight:500;
+    cursor:pointer;
+    transition:0.3s ease;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(59,130,246,0.4);
+}
+
+
+/* Popup Overlay */
+.popup{
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.6);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    backdrop-filter: blur(10px);
+    z-index:999;
+}
+
+/* Hidden */
+.hidden{
+    display:none;
+}
+
+/* Popup Card */
+.popup-card{
+    background: rgba(30,41,59,0.8);
+    backdrop-filter: blur(20px);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:20px;
+    padding:40px;
+    text-align:center;
+    box-shadow: 0 0 40px rgba(79,70,229,0.2);
+    animation: popIn 0.4s ease;
+}
+
+.popup-card h2{
+    margin-bottom:10px;
+    background: linear-gradient(90deg,#6366F1,#3B82F6);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.popup-card p{
+    margin-bottom:20px;
+    opacity:0.8;
+}
+
+/* Button same style */
+.popup-card button{
+    padding:12px 20px;
+    background: linear-gradient(90deg,#6366F1,#3B82F6);
+    border:none;
+    border-radius:10px;
+    color:white;
+    cursor:pointer;
+}
+
+/* Animation */
+@keyframes popIn{
+    from{
+        transform: scale(0.8);
+        opacity:0;
+    }
+    to{
+        transform: scale(1);
+        opacity:1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="chat-wrapper">
+
+    <div class="header">Assessly – AI Interview
+
+        <a href="/profile" class="profile-btn">
+
+            <!-- 👤 SVG PROFILE ICON (same as image) -->
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="10" r="3"></circle>
+                <path d="M7 17c1.5-2 8.5-2 10 0"></path>
+            </svg>
+
+        </a>
+    </div>
+
+    <div class="chat-container" id="chat"></div>
+
+
+    <div class="input-area">
+        <textarea id="userInput" rows="1" placeholder="Type your answer..."></textarea>
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+
+
+</div>
+
+<div id="reportPopup" class="popup hidden">
+    <div class="popup-card">
+        <h2>🎉 Interview Completed</h2>
+        <p>Your report is ready</p>
+        <button id="viewReportBtn">View Report</button>
+    </div>
+</div>
+
+<script>
+const textarea = document.getElementById("userInput");
+
+// Auto expand textarea
+textarea.addEventListener("input", () => {
+    textarea.style.height = "auto";
+    textarea.style.height = textarea.scrollHeight + "px";
+});
+
+// Enter to send
+textarea.addEventListener("keydown", function(e){
+    if(e.key === "Enter" && !e.shiftKey){
+        e.preventDefault();
+        sendMessage();
+    }
+});
+
+// ✅ ONLY ONE FUNCTION (FIXED)
+async function sendMessage(){
+    let input = document.getElementById("userInput");
+    let text = input.value.trim();
+
+    if(text === "") return;
+
+    let chat = document.getElementById("chat");
+
+    // 🟢 Show user message
+    let msg = document.createElement("div");
+    msg.className = "message user";
+    msg.innerText = text;
+    chat.appendChild(msg);
+
+    input.value = "";
+    input.style.height = "auto";
+
+    chat.scrollTop = chat.scrollHeight;
+
+    try {
+        // 🔥 CALL BACKEND
+        let response = await fetch("/ask", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ 
+            message: text,
+            session_id: "{{ session_id }}"
+            })
+        });
+
+        let data = await response.json();
+
+        // 🟢 Show AI response
+        let aiMsg = document.createElement("div");
+        aiMsg.className = "message ai";
+        aiMsg.innerText = data.reply;
+        chat.appendChild(aiMsg);
+
+        chat.scrollTop = chat.scrollHeight;
+
+        
+        if (data.redirect) {
+            let popup = document.getElementById("reportPopup");
+            // Disable input
+            document.getElementById("userInput").disabled = true;
+            document.querySelector("button").disabled = true;
+
+            setTimeout(() => {
+                popup.classList.remove("hidden");
+            }, 800);
+
+            document.getElementById("viewReportBtn").onclick = function(){
+                window.location.href = data.redirect;
+            };
+        }
+
+    } catch (error) {
+        console.error("Error:", error);
+    }
+
+    
+}
+
+
+window.onload = async function () {
+    let chat = document.getElementById("chat");
+
+    try {
+        let response = await fetch("/ask", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message: "start",
+                session_id: "{{ session_id }}"
+            })
+        });
+
+        let data = await response.json();
+
+        // 🟢 Show first question
+        let aiMsg = document.createElement("div");
+        aiMsg.className = "message ai";
+        aiMsg.innerText = data.reply;
+        chat.appendChild(aiMsg);
+
+    } catch (error) {
+        console.error("Error:", error);
+    }
+};
+</script>
+
+</body>
+</html>

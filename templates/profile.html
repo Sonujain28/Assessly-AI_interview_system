@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Profile - Assessly</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: radial-gradient(circle at top left, #1E293B, #0F172A 70%);
+    color:#E2E8F0;
+}
+
+.container{
+    backdrop-filter: blur(25px);
+    background: rgba(30,41,59,0.75);
+    border:1px solid rgba(255,255,255,0.1);
+    padding:50px;
+    width:450px;
+    border-radius:20px;
+    box-shadow: 
+        0 20px 50px rgba(0,0,0,0.6),
+        0 0 50px rgba(99,102,241,0.2);
+    text-align:center;
+}
+
+h2{
+    font-size:28px;
+    margin-bottom:30px;
+    background: linear-gradient(90deg,#6366F1,#3B82F6);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.user-card{
+    background: rgba(15,23,42,0.8);
+    padding:25px 20px;
+    border-radius:15px;
+    border:1px solid rgba(255,255,255,0.08);
+    margin-bottom:30px;
+    text-align:left;
+}
+
+.user-card p{
+    font-size:16px;
+    margin-bottom:12px;
+}
+
+.user-card p strong{
+    color:#fff;
+    width:80px;
+    display:inline-block;
+}
+
+.btn{
+    width:100%;
+    padding:14px;
+    margin-bottom:15px;
+    border:none;
+    border-radius:10px;
+    font-weight:500;
+    color:#fff;
+    cursor:pointer;
+    transition:0.3s ease;
+}
+
+.btn-primary{
+    background: linear-gradient(90deg,#6366F1,#3B82F6);
+}
+
+.btn-primary:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(59,130,246,0.4);
+}
+
+.btn-secondary{
+    background: transparent;
+    border:1px solid #6366F1;
+    color:#6366F1;
+}
+
+.btn-secondary:hover{
+    background: #6366F1;
+    color:#fff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Welcome, {{ user.username }}!</h2>
+
+    <div class="user-card">
+        <p><strong>Name:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+    </div>
+
+    <form action="/logout" method="GET">
+        <button class="btn btn-primary" type="submit">Logout</button>
+    </form>
+
+    <form action="/index" method="GET">
+        <button class="btn btn-secondary" type="submit">Start Interview</button>
+    </form>
+</div>
+
+</body>
+</html>
