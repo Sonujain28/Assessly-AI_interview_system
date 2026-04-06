@@ -269,7 +269,7 @@ textarea.addEventListener("keydown", function(e){
     }
 });
 
-// ✅ ONLY ONE FUNCTION (FIXED)
+//  ONLY ONE FUNCTION (FIXED)
 async function sendMessage(){
     let input = document.getElementById("userInput");
     let text = input.value.trim();
@@ -278,7 +278,7 @@ async function sendMessage(){
 
     let chat = document.getElementById("chat");
 
-    // 🟢 Show user message
+    //  Show user message
     let msg = document.createElement("div");
     msg.className = "message user";
     msg.innerText = text;
@@ -304,7 +304,7 @@ async function sendMessage(){
 
         let data = await response.json();
 
-        // 🟢 Show AI response
+        //  Show AI response
         let aiMsg = document.createElement("div");
         aiMsg.className = "message ai";
         aiMsg.innerText = data.reply;
@@ -353,7 +353,7 @@ window.onload = async function () {
 
         let data = await response.json();
 
-        // 🟢 Show first question
+        //  Show first question
         let aiMsg = document.createElement("div");
         aiMsg.className = "message ai";
         aiMsg.innerText = data.reply;
