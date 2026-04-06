@@ -96,6 +96,7 @@ Pygments==2.19.2
 pyparsing==3.2.3
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.2
+gunicorn==20.1.0
 python-json-logger==3.3.0
 pytz==2025.2
 pywin32==311; platform_system=="Windows"
