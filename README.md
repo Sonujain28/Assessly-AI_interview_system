@@ -3,7 +3,7 @@ Assessly is an AI-powered interview preparation system that generates real-time 
 
 🚀 #Installation & Setup
 Clone the repository:
-git clone https://github.com/<Sonujain28>/Assessly-Ai_Interview_system.git
+https://github.com/Sonujain28/Assessly-AI_interview_system.git
 cd Assessly-Ai_Interview_system
 Create and activate a virtual environment:
 # Linux / Mac
